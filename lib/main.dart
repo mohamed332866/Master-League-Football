@@ -760,4 +760,156 @@ class _TaskHomePageState extends State<TaskHomePage>
       ),
     );
   }
+}import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MasterLeagueApp());
+}
+
+class MasterLeagueApp extends StatelessWidget {
+  const MasterLeagueApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Master League',
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
+        scaffoldBackgroundColor: const Color(0xFF0F172A), // خلفية داكنة رياضية
+      ),
+      home: const HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF1E293B),
+        elevation: 4,
+        centerTitle: true,
+        title: const Text(
+          'ماستر ليج - Master League',
+          style: TextStyle(
+            color: Color(0xFFF59E0B), // لون ذهبي احترافي
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications_active, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Banners Section
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF1E3A8A), Color(0xFF3B82F6)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.blue.withOpacity(0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  )
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    '🏆 بطولات الأندية والمنتخبات',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'اختر فريقك المفضل وابدأ المنافسة الآن!',
+                    style: TextStyle(color: Colors.white70, fontSize: 14),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            
+            // Section Title
+            const Text(
+              'الأقسام الرئيسية',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // Categories Grid
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                children: [
+                  _buildCategoryCard('الأندية العالمية', Icons.sports_soccer, const Color(0xFFE11D48)),
+                  _buildCategoryCard('المنتخبات الوطنية', Icons.flag, const Color(0xFF0D9488)),
+                  _buildCategoryCard('جدول المباريات', Icons.calendar_month, const Color(0xFFD97706)),
+                  _buildCategoryCard('إحصائيات ونتائج', Icons.bar_chart, const Color(0xFF9333EA)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCategoryCard(String title, IconData icon, Color accentColor) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E293B),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: accentColor.withOpacity(0.5), width: 1.5),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: 28,
+            backgroundColor: accentColor.withOpacity(0.2),
+            child: Icon(icon, size: 32, color: accentColor),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
